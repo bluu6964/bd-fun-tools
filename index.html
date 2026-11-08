@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<meta name="description" content="BD Fun Tools — বন্ধুত্বের স্কোর, ভাগ্যের নম্বর, মজার কুইজ, বয়সের হিসাব আর মুড মিটার। সব টুল সম্পূর্ণ ফ্রি!" />
+<link rel="icon" href="data:," />
+<title>BD Fun Tools — মজার সব টুল, এক ঠিকানায়!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#faf7ff;
+    --card:#ffffff;
+    --ink:#2b2140;
+    --ink-soft:#5d5470;
+    --line:#e9e2f7;
+    --violet:#7c3aed;
+    --violet-deep:#6d28d9;
+    --pink:#ec4899;
+    --pink-soft:#fdf2f8;
+    --violet-soft:#f3efff;
+    --amber:#f59e0b;
+    --green:#10b981;
+    --grad:linear-gradient(92deg,#7c3aed 0%,#c026d3 55%,#ec4899 100%);
+    --shadow:0 10px 30px rgba(124,58,237,.10), 0 2px 6px rgba(43,33,64,.05);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(560px 300px at 110% -60px, rgba(236,72,153,.14), transparent 65%),
+      radial-gradient(620px 340px at -140px 120px, rgba(124,58,237,.13), transparent 65%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Hind Siliguri","Noto Sans Bengali","SolaimanLipi",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 8px}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:38px 6px 10px;text-align:center}
+  .hero-badge{
+    display:inline-block;background:#fff;border:1.5px solid var(--line);
+    color:var(--violet-deep);font-weight:600;font-size:.86rem;
+    padding:5px 14px;border-radius:999px;box-shadow:var(--shadow);
+  }
+  h1{
+    font-family:"Baloo Da 2","Hind Siliguri",sans-serif;
+    font-size:clamp(2rem,8.5vw,3.1rem);line-height:1.2;font-weight:800;
+    margin:16px 0 10px;letter-spacing:.2px;
+  }
+  h1 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{color:var(--ink-soft);max-width:520px;margin:0 auto;font-size:1.02rem}
+  .hero-emojis{font-size:1.5rem;letter-spacing:.35em;margin-top:14px}
+  nav.quick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0 4px}
+  nav.quick a{
+    text-decoration:none;color:var(--ink);background:#fff;border:1.5px solid var(--line);
+    padding:7px 14px;border-radius:999px;font-size:.92rem;font-weight:600;
+    box-shadow:0 2px 6px rgba(43,33,64,.05);
+  }
+  nav.quick a:active{transform:scale(.97)}
+
+  /* ---------- Ad slot ---------- */
+  .ad-slot{margin:22px 0;background:#fff}
+  .ad-label{color:#a79fc0;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;font-family:system-ui,sans-serif}
+
+  /* ---------- Cards / tools ---------- */
+  section.tool{
+    background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:24px 20px 22px;margin:22px 0;position:relative;overflow:hidden;
+  }
+  section.tool::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--grad)}
+  .tool h2{
+    font-family:"Baloo Da 2","Hind Siliguri",sans-serif;
+    font-size:1.45rem;font-weight:700;margin:4px 0 4px;line-height:1.35;
+  }
+  .tool .desc{color:var(--ink-soft);margin:0 0 16px;font-size:.98rem}
+  label.f-label{display:block;font-weight:600;font-size:.95rem;margin:12px 0 6px}
+  input[type="text"],input[type="date"]{
+    width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;
+    font:inherit;font-size:1rem;color:var(--ink);background:#fdfcff;outline:none;
+  }
+  input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(124,58,237,.15);background:#fff}
+  .vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+  .vs-badge{
+    width:42px;height:42px;border-radius:50%;background:var(--grad);color:#fff;
+    display:grid;place-items:center;font-weight:700;font-family:"Baloo Da 2",sans-serif;
+    margin-bottom:2px;font-size:.95rem;box-shadow:0 6px 14px rgba(192,38,211,.35);
+  }
+  button.go{
+    width:100%;margin-top:18px;border:0;cursor:pointer;color:#fff;background:var(--grad);
+    font:inherit;font-weight:700;font-size:1.06rem;padding:14px 18px;border-radius:14px;
+    box-shadow:0 8px 20px rgba(192,38,211,.30);
+  }
+  button.go:active{transform:scale(.985)}
+  button.copy-btn{
+    margin-top:14px;border:1.5px solid var(--violet);background:var(--violet-soft);color:var(--violet-deep);
+    font:inherit;font-weight:700;font-size:.98rem;padding:11px 16px;border-radius:12px;cursor:pointer;width:100%;
+  }
+  button.copy-btn:active{transform:scale(.985)}
+  button.copy-btn.copied{background:var(--green);border-color:var(--green);color:#fff}
+
+  .result{display:none;margin-top:20px;text-align:center;background:var(--pink-soft);border:1.5px dashed #f3b8da;border-radius:16px;padding:20px 16px}
+  .result.show{display:block;animation:pop .35s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  @media (prefers-reduced-motion: reduce){.result.show{animation:none} html{scroll-behavior:auto}}
+  .big-num{
+    font-family:"Baloo Da 2",sans-serif;font-weight:800;font-size:3.4rem;line-height:1.05;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .big-num small{font-size:1.6rem}
+  .bar-track{height:16px;background:#fff;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;margin:14px auto 6px;max-width:420px}
+  .bar-fill{height:100%;width:0%;background:var(--grad);border-radius:999px;transition:width 1s cubic-bezier(.22,1,.36,1)}
+  .verdict{font-size:1.05rem;font-weight:600;margin:10px 0 2px}
+  .sub-note{color:var(--ink-soft);font-size:.92rem;margin:4px 0 0}
+  .err{display:none;margin-top:14px;background:#fef2f2;border:1.5px solid #fecaca;color:#b91c1c;border-radius:12px;padding:10px 14px;font-size:.95rem;font-weight:600}
+  .err.show{display:block}
+
+  /* Lucky number */
+  .lucky-ball{
+    width:118px;height:118px;margin:4px auto 6px;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #fbbf24, #f59e0b 55%, #d97706);
+    display:grid;place-items:center;color:#fff;
+    font-family:"Baloo Da 2",sans-serif;font-weight:800;font-size:2.9rem;
+    box-shadow:0 14px 28px rgba(245,158,11,.35), inset 0 -8px 16px rgba(0,0,0,.15);
+    text-shadow:0 2px 4px rgba(0,0,0,.2);
+  }
+
+  /* Quiz */
+  .quiz-q{margin:18px 0 4px}
+  .quiz-q p{font-weight:700;margin:0 0 10px;font-size:1.02rem}
+  .quiz-q p .q-no{color:var(--pink)}
+  .opts{display:grid;gap:8px}
+  @media (min-width:560px){.opts{grid-template-columns:1fr 1fr}}
+  .opt{
+    text-align:left;font:inherit;font-size:.97rem;cursor:pointer;
+    background:#fdfcff;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;color:var(--ink);
+  }
+  .opt:active{transform:scale(.99)}
+  .opt.sel{border-color:var(--violet);background:var(--violet-soft);font-weight:600;box-shadow:0 0 0 3px rgba(124,58,237,.14)}
+  .quiz-progress{font-size:.9rem;color:var(--ink-soft);margin-top:14px;text-align:center;font-weight:600}
+  .type-emoji{font-size:3rem;line-height:1.2}
+  .type-name{font-family:"Baloo Da 2",sans-serif;font-size:1.7rem;font-weight:800;margin:2px 0 6px}
+  .type-desc{max-width:480px;margin:0 auto;color:var(--ink-soft)}
+
+  /* Age stats */
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+  .stat{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 6px}
+  .stat .v{font-family:"Baloo Da 2",sans-serif;font-weight:800;font-size:1.28rem;color:var(--violet-deep);line-height:1.25;word-break:break-all}
+  .stat .k{font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .bday-box{margin-top:14px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px}
+  .bday-box .v{font-family:"Baloo Da 2",sans-serif;font-weight:800;font-size:1.5rem;color:var(--pink)}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle}
+
+  /* Mood */
+  .mood-face{font-size:3.4rem;line-height:1.15}
+
+  /* ---------- Footer ---------- */
+  footer{margin:30px 0 34px}
+  .more-box{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px}
+  .more-box h2{font-family:"Baloo Da 2",sans-serif;font-size:1.3rem;margin:0 0 14px}
+  .more-link{
+    display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:10px;background:#fdfcff;
+  }
+  .more-link .ic{font-size:1.6rem}
+  .more-link b{display:block;font-size:1rem;line-height:1.4}
+  .more-link span{color:var(--ink-soft);font-size:.9rem}
+  .more-link .arr{margin-left:auto;color:var(--violet);font-weight:800;font-size:1.2rem}
+  .foot-line{text-align:center;color:var(--ink-soft);margin:20px 0 4px;font-weight:600}
+  .foot-small{text-align:center;color:#a79fc0;font-size:.85rem;margin:2px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <span class="hero-badge">🎉 BD Fun Tools — সম্পূর্ণ ফ্রি</span>
+    <h1>মজার সব টুল, <span class="grad-text">এক ঠিকানায়!</span></h1>
+    <p class="hero-sub">বন্ধুত্বের স্কোর, ভাগ্যের নম্বর, মজার কুইজসহ দারুণ সব টুল — সব একদম ফ্রি, কোনো সাইন-আপ লাগে না। রেজাল্ট পেলেই বন্ধুদের সাথে শেয়ার করে মজা দ্বিগুণ করে ফেলো!</p>
+    <div class="hero-emojis" aria-hidden="true">🤝 🍀 🎭 🎂 😊</div>
+    <nav class="quick">
+      <a href="#friendship">🤝 বন্ধুত্বের স্কোর</a>
+      <a href="#lucky">🍀 ভাগ্যের নম্বর</a>
+      <a href="#quiz">🎭 পার্সোনালিটি কুইজ</a>
+      <a href="#age">🎂 বয়সের হিসাব</a>
+      <a href="#mood">😊 মুড মিটার</a>
+    </nav>
+  </header>
+
+  <div class="ad-slot" style="min-height:110px;display:grid;place-items:center;border:1.5px dashed #c9c2e0;border-radius:14px"><a href="https://www.profitableratecpmnetwork.com/crdckuxrx?key=8e640f6c29b8e65f3b90970d2be285f5" target="_blank" rel="noopener sponsored nofollow" style="display:grid;place-items:center;width:100%;height:100%;text-decoration:none;color:inherit;cursor:pointer"><span class="ad-label">Advertisement</span><span class="ad-cta" style="display:block;margin-top:6px;font-weight:700;color:#d97706;text-decoration:underline">স্পন্সরড — অফার দেখতে ক্লিক করুন</span></a></div>
+
+  <!-- ================= 1. FRIENDSHIP ================= -->
+  <section class="tool" id="friendship">
+    <h2>🤝 বন্ধুত্বের স্কোর</h2>
+    <p class="desc">তোমার আর প্রিয় বন্ধুর নাম লেখো — দেখে নাও তোমাদের বন্ধুত্ব কতটা শক্ত! একই দুটো নামে সবসময় একই স্কোর আসবে, নামের ক্রম বদলালেও।</p>
+    <div class="vs-row">
+      <div>
+        <label class="f-label" for="f-name1">তোমার নাম</label>
+        <input type="text" id="f-name1" placeholder="যেমন: রাহিম" autocomplete="off" />
+      </div>
+      <div class="vs-badge">VS</div>
+      <div>
+        <label class="f-label" for="f-name2">বন্ধুর নাম</label>
+        <input type="text" id="f-name2" placeholder="যেমন: করিম" autocomplete="off" />
+      </div>
+    </div>
+    <button class="go" id="f-btn">💖 স্কোর দেখুন</button>
+    <div class="err" id="f-err">দুটো নামই লিখতে হবে! একটা নাম বাদ দিলে বন্ধুত্ব মাপা যাবে না। 🙂</div>
+    <div class="result" id="f-result">
+      <div class="big-num"><span id="f-num">০</span><small>%</small></div>
+      <div class="bar-track"><div class="bar-fill" id="f-bar"></div></div>
+      <p class="verdict" id="f-verdict"></p>
+      <p class="sub-note" id="f-names"></p>
+      <button class="copy-btn" id="f-copy">📋 রেজাল্ট কপি করুন</button>
+    </div>
+  </section>
+
+  <!-- ================= 2. LUCKY NUMBER ================= -->
+  <section class="tool" id="lucky">
+    <h2>🍀 আজকের ভাগ্যের নম্বর</h2>
+    <p class="desc">তোমার নাম আর জন্মতারিখ মিলিয়ে আজকের দিনের জন্য তোমার নিজস্ব লাকি নম্বর! প্রতিদিন নতুন নম্বর, নতুন ভবিষ্যদ্বাণী।</p>
+    <label class="f-label" for="l-name">তোমার নাম</label>
+    <input type="text" id="l-name" placeholder="যেমন: সারোয়ার" autocomplete="off" />
+    <label class="f-label" for="l-dob">জন্মতারিখ</label>
+    <input type="date" id="l-dob" />
+    <button class="go" id="l-btn">🔮 ভাগ্যের নম্বর দেখুন</button>
+    <div class="err" id="l-err">নাম আর জন্মতারিখ — দুটোই লাগবে! তাহলেই আজকের ভাগ্য খুলবে। 🙂</div>
+    <div class="result" id="l-result">
+      <div class="lucky-ball" id="l-num">০</div>
+      <p class="verdict" id="l-pred"></p>
+      <p class="sub-note" id="l-sub"></p>
+      <button class="copy-btn" id="l-copy">📋 রেজাল্ট কপি করুন</button>
+    </div>
+  </section>
+
+  <div class="ad-slot" style="min-height:110px;display:grid;place-items:center;border:1.5px dashed #c9c2e0;border-radius:14px"><a href="https://www.profitableratecpmnetwork.com/crdckuxrx?key=8e640f6c29b8e65f3b90970d2be285f5" target="_blank" rel="noopener sponsored nofollow" style="display:grid;place-items:center;width:100%;height:100%;text-decoration:none;color:inherit;cursor:pointer"><span class="ad-label">Advertisement</span><span class="ad-cta" style="display:block;margin-top:6px;font-weight:700;color:#d97706;text-decoration:underline">স্পন্সরড — অফার দেখতে ক্লিক করুন</span></a></div>
+
+  <!-- ================= 3. QUIZ ================= -->
+  <section class="tool" id="quiz">
+    <h2>🎭 তুমি কোন টাইপের মানুষ?</h2>
+    <p class="desc">মাত্র ৫টা মজার প্রশ্নের উত্তর দাও — আমরা বলে দেব তুমি আসলে কোন টাইপের মানুষ! উত্তর বদলাতে যেকোনো অপশনে আবার চাপ দিলেই হবে।</p>
+    <div id="quiz-body"></div>
+    <p class="quiz-progress" id="quiz-progress"></p>
+    <button class="go" id="q-btn">✨ আমার টাইপ দেখুন</button>
+    <div class="err" id="q-err">সবগুলো প্রশ্নের উত্তর দিতে হবে! কোনো প্রশ্ন বাকি থাকলে টাইপ বের করা যাবে না। 🙂</div>
+    <div class="result" id="q-result">
+      <div class="type-emoji" id="q-emoji"></div>
+      <div class="type-name" id="q-type"></div>
+      <p class="type-desc" id="q-desc"></p>
+      <button class="copy-btn" id="q-copy">📋 রেজাল্ট কপি করুন</button>
+    </div>
+  </section>
+
+  <!-- ================= 4. AGE ================= -->
+  <section class="tool" id="age">
+    <h2>🎂 তোমার বয়সের মজার হিসাব</h2>
+    <p class="desc">জন্মতারিখ দাও — দেখে নাও এই পৃথিবীতে তুমি মোট কত দিন, কত ঘণ্টা আর কত মিনিট কাটিয়ে ফেলেছ! হিসাবটা প্রতি সেকেন্ডে লাইভ বাড়ছে।</p>
+    <label class="f-label" for="a-dob">তোমার জন্মতারিখ</label>
+    <input type="date" id="a-dob" />
+    <button class="go" id="a-btn">🧮 হিসাব করুন</button>
+    <div class="err" id="a-err">সঠিক জন্মতারিখ দিতে হবে — ভবিষ্যতের তারিখ দিলে তো এখনো জন্মই হয়নি! 🙂</div>
+    <div class="result" id="a-result" style="background:var(--violet-soft);border-color:#cdbffa">
+      <p style="margin:0 0 10px;font-weight:700"><span class="live-dot"></span>তুমি এই পৃথিবীতে আছো…</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="v" id="a-days">০</div><div class="k">মোট দিন</div></div>
+        <div class="stat"><div class="v" id="a-hours">০</div><div class="k">মোট ঘণ্টা</div></div>
+        <div class="stat"><div class="v" id="a-mins">০</div><div class="k">মোট মিনিট</div></div>
+      </div>
+      <p class="sub-note" style="margin-top:10px">আর মোট <b id="a-secs">০</b> সেকেন্ড — টিকটিক করে বাড়ছেই! ⏱️</p>
+      <div class="bday-box">
+        <div style="font-size:.92rem;color:var(--ink-soft);font-weight:600">🎉 পরের জন্মদিন আসতে বাকি</div>
+        <div class="v"><span id="a-bday">০</span> দিন</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. MOOD ================= -->
+  <section class="tool" id="mood">
+    <h2>😊 আজকের মুড মিটার</h2>
+    <p class="desc">নাম লিখলেই জানা যাবে আজ তোমার মুড কেমন যাচ্ছে! প্রতিদিন মুড বদলায় — কাল আবার এসে চেক করো।</p>
+    <label class="f-label" for="m-name">তোমার নাম</label>
+    <input type="text" id="m-name" placeholder="যেমন: তানিয়া" autocomplete="off" />
+    <button class="go" id="m-btn">🌈 আজকের মুড দেখুন</button>
+    <div class="err" id="m-err">আগে নিজের নামটা লিখতে হবে! নাম ছাড়া মুড ধরা যায় না। 🙂</div>
+    <div class="result" id="m-result">
+      <div class="mood-face" id="m-face">😐</div>
+      <div class="big-num"><span id="m-num">০</span><small>%</small></div>
+      <div class="bar-track"><div class="bar-fill" id="m-bar"></div></div>
+      <p class="verdict" id="m-line"></p>
+      <p class="sub-note" id="m-sub"></p>
+      <button class="copy-btn" id="m-copy">📋 রেজাল্ট কপি করুন</button>
+    </div>
+  </section>
+
+  <div class="ad-slot" style="min-height:110px;display:grid;place-items:center;border:1.5px dashed #c9c2e0;border-radius:14px"><a href="https://www.profitableratecpmnetwork.com/crdckuxrx?key=8e640f6c29b8e65f3b90970d2be285f5" target="_blank" rel="noopener sponsored nofollow" style="display:grid;place-items:center;width:100%;height:100%;text-decoration:none;color:inherit;cursor:pointer"><span class="ad-label">Advertisement</span><span class="ad-cta" style="display:block;margin-top:6px;font-weight:700;color:#d97706;text-decoration:underline">স্পন্সরড — অফার দেখতে ক্লিক করুন</span></a></div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="more-box">
+      <h2>🧰 আমাদের আরও ফ্রি টুল</h2>
+      <a class="more-link" href="https://bluu6964.github.io/viral-prompt-bd-tools/" target="_blank" rel="noopener">
+        <span class="ic">🎨</span>
+        <span><b>Viral Prompt BD Tools</b><span>ফ্রি AI ছবির প্রম্পট ও টুল</span></span>
+        <span class="arr">→</span>
+      </a>
+      <a class="more-link" href="https://bluu6964.github.io/bd-study-tools/" target="_blank" rel="noopener">
+        <span class="ic">📚</span>
+        <span><b>BD Study Tools</b><span>GPA ও পড়াশোনার হিসাব</span></span>
+        <span class="arr">→</span>
+      </a>
+    </div>
+    <p class="foot-line">সব টুল সম্পূর্ণ ফ্রি • কোনো সাইন-আপ লাগে না</p>
+    <p class="foot-small">BD Fun Tools • মজার জন্য বানানো — রেজাল্টগুলো শুধুই বিনোদনের জন্য 😄</p>
+  </footer>
+
+</div>
+
+<script>
+"use strict";
+/* ---------- helpers ---------- */
+function $(id){ return document.getElementById(id); }
+var BN = "০১২৩৪৫৬৭৮৯";
+function bn(n){ return String(n).replace(/[0-9]/g, function(d){ return BN[+d]; }); }
+function bnNum(n){ return bn(Number(n).toLocaleString("en-US")); }
+
+/* Stable string hash (FNV-1a) — same input always gives same output */
+function hashStr(s){
+  var h = 0x811c9dc5;
+  s = String(s);
+  for (var i = 0; i < s.length; i++){
+    h ^= s.charCodeAt(i);
+    h = (h * 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+function normName(s){ return String(s || "").trim().toLowerCase().replace(/\s+/g, " "); }
+function todayStr(){
+  var d = new Date();
+  var m = d.getMonth() + 1, day = d.getDate();
+  return d.getFullYear() + "-" + (m < 10 ? "0" + m : m) + "-" + (day < 10 ? "0" + day : day);
+}
+function animateNum(el, target, suffix){
+  var start = null, dur = 900;
+  function step(ts){
+    if (!start) start = ts;
+    var p = Math.min((ts - start) / dur, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = bn(Math.round(target * eased));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function copyText(text, btn){
+  function done(){
+    var old = btn.textContent;
+    btn.textContent = "✅ কপি হয়েছে!";
+    btn.classList.add("copied");
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove("copied"); }, 2000);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(ta); done();
+  }
+}
+function showErr(id, show){ $(id).classList.toggle("show", !!show); }
+
+/* ---------- 1. Friendship Score ---------- */
+var fState = null;
+var F_VERDICTS = [
+  { min: 90, text: "কিংবদন্তি জুটি! 👑 তোমাদের বন্ধুত্ব সিনেমার গল্পকেও হার মানাবে!" },
+  { min: 75, text: "দারুণ জুটি! ☕ চা আর সিঙাড়ার মতো — আলাদা হলেই মজা অর্ধেক হয়ে যায়।" },
+  { min: 60, text: "ভালোই চলছে! 😄 মাঝে মাঝে খুনসুটি হলেও মনের মিল ঠিকই আছে।" },
+  { min: 40, text: "মোটামুটি চলছে! 🙂 একসাথে আরেকটু বেশি আড্ডা দিলেই স্কোর আকাশ ছোঁবে।" },
+  { min: 0,  text: "হুমম, ঝগড়া-ঝগড়া খেলা চলছে! 😜 একসাথে এক প্লেট বিরিয়ানি খেলেই সব ঠিক হয়ে যাবে।" }
+];
+$("f-btn").addEventListener("click", function(){
+  var n1 = $("f-name1").value.trim(), n2 = $("f-name2").value.trim();
+  if (!n1 || !n2){ showErr("f-err", true); $("f-result").classList.remove("show"); return; }
+  showErr("f-err", false);
+  var pair = [normName(n1), normName(n2)].sort().join(" ❤ ");
+  var score = 25 + (hashStr("friendship|" + pair) % 76); /* 25–100 */
+  var verdict = F_VERDICTS.filter(function(v){ return score >= v.min; })[0].text;
+  fState = { n1: n1, n2: n2, score: score, verdict: verdict };
+  $("f-result").classList.add("show");
+  animateNum($("f-num"), score);
+  $("f-bar").style.width = "0%";
+  setTimeout(function(){ $("f-bar").style.width = score + "%"; }, 60);
+  $("f-verdict").textContent = verdict;
+  $("f-names").textContent = n1 + " ❤️ " + n2;
+  $("f-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+$("f-copy").addEventListener("click", function(){
+  if (!fState) return;
+  copyText("🤝 বন্ধুত্বের স্কোর!\n" + fState.n1 + " ❤️ " + fState.n2 + " = " + bn(fState.score) + "%\n" + fState.verdict + "\nতুমিও তোমার বন্ধুর সাথে চেক করো — BD Fun Tools-এ! 🎉", this);
+});
+
+/* ---------- 2. Lucky Number ---------- */
+var lState = null;
+var L_PREDS = [
+  "আজ অপ্রত্যাশিত একটা ভালো খবর পেতে পারো — ফোনটা হাতের কাছেই রাখো! 📱",
+  "আজ কারো কাছ থেকে চা-নাস্তার দাওয়াত পাওয়ার সম্ভাবনা প্রবল! ☕",
+  "আজ পুরনো এক বন্ধুর সাথে হঠাৎ দেখা হয়ে যেতে পারে! 🤗",
+  "আজ টাকা বাঁচানোর দিন — অকারণ খরচ দেখলেই পকেটে হাত চাপা দাও! 💰",
+  "আজ তোমার হাসিটাই তোমার সবচেয়ে বড় অস্ত্র — বেশি করে হাসো! 😁",
+  "আজ নতুন কিছু শেখার দারুণ সুযোগ আসতে পারে — চোখ-কান খোলা রাখো! 📚",
+  "আজ যা মন চায় একটু সাহস করে বলে ফেলো — কাজ হতে পারে! 💪",
+  "আজ বিকেলের দিকে মনটা হালকা ভালো লাগায় ভরে উঠবে! 🌇",
+  "আজ কারো প্রশংসা পাবে — শুনে লজ্জা পেলেও মুখে হাসি রাখো! 🌟",
+  "আজ ভাগ্য তোমার পক্ষে — ছোট্ট একটা ঝুঁকি নিলে লাভ হতে পারে! 🎲"
+];
+$("l-btn").addEventListener("click", function(){
+  var name = $("l-name").value.trim(), dob = $("l-dob").value;
+  if (!name || !dob){ showErr("l-err", true); $("l-result").classList.remove("show"); return; }
+  showErr("l-err", false);
+  var num = 1 + (hashStr("lucky|" + normName(name) + "|" + dob + "|" + todayStr()) % 99);
+  var pred = L_PREDS[hashStr("pred|" + normName(name) + "|" + todayStr()) % L_PREDS.length];
+  lState = { name: name, num: num, pred: pred };
+  $("l-result").classList.add("show");
+  animateNum($("l-num"), num);
+  $("l-pred").textContent = pred;
+  $("l-sub").textContent = name + "-এর আজকের ভাগ্যের নম্বর • কাল আবার নতুন নম্বর আসবে!";
+  $("l-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+$("l-copy").addEventListener("click", function(){
+  if (!lState) return;
+  copyText("🍀 আজকের ভাগ্যের নম্বর!\n" + lState.name + "-এর লাকি নম্বর: " + bn(lState.num) + "\n" + lState.pred + "\nতোমারটা জানতে চেক করো BD Fun Tools-এ! 🔮", this);
+});
+
+/* ---------- 3. Personality Quiz ---------- */
+var TYPES = [
+  { name: "জন্মগত লিডার", emoji: "👑", desc: "তুমি যেখানে যাও, নেতৃত্ব তোমার পিছু ছাড়ে না। সিদ্ধান্ত নিতে তুমি পিছপা হও না, আর সবাই স্বাভাবিকভাবেই তোমার কথায় ভরসা রাখে — জন্মগত লিডার বলে কথা!" },
+  { name: "মিম লর্ড", emoji: "😂", desc: "হাসি-ঠাট্টাই তোমার সুপারপাওয়ার! যেকোনো পরিস্থিতিতে তুমি মজার দিকটা খুঁজে বের করো, আর তোমার মিম-কালেকশন দেখলে বন্ধুরা হাসতে হাসতে গড়াগড়ি খায়।" },
+  { name: "শান্ত মাথার মাস্টারমাইন্ড", emoji: "🧠", desc: "বাইরে তুমি শান্ত আর নিরীহ, কিন্তু মাথার ভেতরে সবসময় চলছে একের পর এক মাস্টারপ্ল্যান। সবাই যখন হইচই করে, তুমি তখন চুপচাপ পুরো খেলাটাই সাজিয়ে ফেলো!" },
+  { name: "পার্টি প্রাণ", emoji: "🎉", desc: "তুমি এলেই আসর জমে ওঠে! গান, আড্ডা আর হইহুল্লোড় — তোমার শক্তি ছড়িয়ে পড়ে সবার মাঝে। তুমি ছাড়া যেকোনো অনুষ্ঠানই অর্ধেক মজা।" },
+  { name: "স্বপ্নবাজ ভ্রমণকারী", emoji: "✈️", desc: "তোমার মন সবসময় নতুন জায়গা আর নতুন অভিজ্ঞতার খোঁজে ঘোরে। এক জায়গায় থেমে থাকা তোমার ধাঁচে নেই — পৃথিবীটা ঘুরে দেখাই তোমার স্বপ্ন!" },
+  { name: "দিলের রাজা", emoji: "❤️", desc: "তোমার মনটা সোনার চেয়েও খাঁটি! সবার খেয়াল রাখা, বিপদে পাশে দাঁড়ানো আর নিঃস্বার্থ ভালোবাসাই তোমার পরিচয়। বন্ধুরা তোমাকে পেয়ে সত্যিই ভাগ্যবান।" }
+];
+/* each option: [text, typeIndex] — 0 লিডার, 1 মিম, 2 মাস্টারমাইন্ড, 3 পার্টি, 4 ভ্রমণকারী, 5 দিলের রাজা */
+var QUESTIONS = [
+  { q: "ছুটির দিন পেলে তুমি সবচেয়ে বেশি কী করতে চাও?", opts: [
+    ["বন্ধুদের নিয়ে জম্পেশ আড্ডা আর খাওয়া-দাওয়া", 3],
+    ["নতুন কোনো জায়গায় ঘুরতে বেরিয়ে পড়া", 4],
+    ["সোফায় শুয়ে মিম দেখা আর শেয়ার করা", 1],
+    ["বই পড়া কিংবা নতুন কিছু শেখা", 2] ] },
+  { q: "গ্রুপ প্রজেক্টে তোমার ভূমিকা সাধারণত কী হয়?", opts: [
+    ["পুরো টিমকে সাজিয়ে চালিয়ে নেওয়া", 0],
+    ["সবাইকে হাসিয়ে মেজাজ হালকা রাখা", 1],
+    ["চুপচাপ বসে পুরো প্ল্যানটা বানিয়ে ফেলা", 2],
+    ["সবার খেয়াল রাখা, যাতে কেউ বাদ না পড়ে", 5] ] },
+  { q: "হঠাৎ ১০,০০০ টাকা হাতে পেলে কী করবে?", opts: [
+    ["বন্ধুদের বড়সড় ট্রিট দিয়ে পার্টি!", 3],
+    ["ট্রাভেলের জন্য জমিয়ে রাখব", 4],
+    ["নতুন গ্যাজেট বা কাজের কোর্সে লাগাব", 2],
+    ["পরিবারের প্রিয়জনদের জন্য কিছু কিনব", 5] ] },
+  { q: "বন্ধুরা তোমাকে এক কথায় কী বলে ডাকে?", opts: [
+    ["বস! সিদ্ধান্ত মানেই তুমি", 0],
+    ["কমেডি কিং — হাসির ঝুলি", 1],
+    ["সাইলেন্ট কিলার — কম কথা, বেশি কাজ", 2],
+    ["সবার প্রিয় — মনটা বিশাল", 5] ] },
+  { q: "তোমার স্বপ্নের জীবনটা কেমন?", opts: [
+    ["বড় একটা টিমের নেতৃত্ব দেওয়া", 0],
+    ["পুরো পৃথিবী ঘুরে বেড়ানো", 4],
+    ["নিজের শর্তে শান্ত, গোছানো জীবন", 2],
+    ["প্রিয়জনদের নিয়ে উৎসবে ভরা জীবন", 3] ] }
+];
+var quizAnswers = [null, null, null, null, null];
+var qState = null;
+(function buildQuiz(){
+  var body = $("quiz-body");
+  QUESTIONS.forEach(function(item, qi){
+    var div = document.createElement("div");
+    div.className = "quiz-q";
+    var p = document.createElement("p");
+    p.innerHTML = "<span class='q-no'>প্রশ্ন " + bn(qi + 1) + ":</span> " + item.q;
+    div.appendChild(p);
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    item.opts.forEach(function(o, oi){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "opt"; b.textContent = o[0];
+      b.addEventListener("click", function(){
+        quizAnswers[qi] = o[1];
+        var sibs = opts.querySelectorAll(".opt");
+        for (var i = 0; i < sibs.length; i++) sibs[i].classList.remove("sel");
+        b.classList.add("sel");
+        updateQuizProgress();
+      });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    body.appendChild(div);
+  });
+  updateQuizProgress();
+})();
+function updateQuizProgress(){
+  var done = quizAnswers.filter(function(a){ return a !== null; }).length;
+  $("quiz-progress").textContent = "উত্তর দেওয়া হয়েছে: " + bn(done) + " / " + bn(QUESTIONS.length);
+}
+$("q-btn").addEventListener("click", function(){
+  if (quizAnswers.indexOf(null) !== -1){ showErr("q-err", true); $("q-result").classList.remove("show"); return; }
+  showErr("q-err", false);
+  var tally = [0, 0, 0, 0, 0, 0];
+  quizAnswers.forEach(function(t){ tally[t]++; });
+  var best = 0;
+  for (var i = 1; i < tally.length; i++){ if (tally[i] > tally[best]) best = i; }
+  var t = TYPES[best];
+  qState = t;
+  $("q-result").classList.add("show");
+  $("q-emoji").textContent = t.emoji;
+  $("q-type").textContent = "তুমি হলে: " + t.name + "!";
+  $("q-desc").textContent = t.desc;
+  $("q-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+$("q-copy").addEventListener("click", function(){
+  if (!qState) return;
+  copyText("🎭 আমি কোন টাইপের মানুষ?\nআমার টাইপ: " + qState.emoji + " " + qState.name + "\n" + qState.desc + "\nতুমিও কুইজটা দিয়ে দেখো তুমি কোন টাইপ — BD Fun Tools-এ! ✨", this);
+});
+
+/* ---------- 4. Fun Age Counter ---------- */
+var ageTimer = null;
+$("a-btn").addEventListener("click", function(){
+  var v = $("a-dob").value;
+  if (!v){ showErr("a-err", true); $("a-result").classList.remove("show"); return; }
+  var dob = new Date(v + "T00:00:00");
+  if (isNaN(dob.getTime()) || dob.getTime() > Date.now()){
+    showErr("a-err", true); $("a-result").classList.remove("show"); return;
+  }
+  showErr("a-err", false);
+  $("a-result").classList.add("show");
+  if (ageTimer) clearInterval(ageTimer);
+  function tick(){
+    var now = new Date();
+    var diffMs = now.getTime() - dob.getTime();
+    var secs = Math.floor(diffMs / 1000);
+    var mins = Math.floor(secs / 60);
+    var hours = Math.floor(mins / 60);
+    var days = Math.floor(hours / 24);
+    $("a-days").textContent = bnNum(days);
+    $("a-hours").textContent = bnNum(hours);
+    $("a-mins").textContent = bnNum(mins);
+    $("a-secs").textContent = bnNum(secs);
+    var next = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+    if (next.getTime() <= now.getTime()) next = new Date(now.getFullYear() + 1, dob.getMonth(), dob.getDate());
+    var remain = Math.ceil((next.getTime() - now.getTime()) / 86400000);
+    $("a-bday").textContent = bn(remain);
+  }
+  tick();
+  ageTimer = setInterval(tick, 1000);
+  $("a-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+
+/* ---------- 5. Mood Meter ---------- */
+var mState = null;
+var MOODS = [
+  { min: 90, face: "🤩", text: "আজ তুমি একদম আগুন ফর্মে! 🔥 এই এনার্জি দিয়ে যেকোনো কাজ জয় করা যাবে।" },
+  { min: 75, face: "😄", text: "আজ মনটা দারুণ ফুরফুরে! 😄 হাসিমুখে থাকো — ভালো কিছু একটা ঘটবেই।" },
+  { min: 55, face: "🙂", text: "আজ মুড মোটামুটি ভালোই! 🙂 এক কাপ চা আর পছন্দের গান হলেই পারফেক্ট হয়ে যাবে।" },
+  { min: 35, face: "😐", text: "আজ মুড একটু ঢিলেঢালা! 😐 বন্ধুদের সাথে একটু আড্ডা দিলেই চাঙা হয়ে যাবে।" },
+  { min: 0,  face: "😴", text: "আজ মুড স্লো মোশনে চলছে! 😴 চিন্তা নেই — ভালো একটা ঘুম আর বিরিয়ানি হলেই কাল আবার ফুল চার্জ!" }
+];
+$("m-btn").addEventListener("click", function(){
+  var name = $("m-name").value.trim();
+  if (!name){ showErr("m-err", true); $("m-result").classList.remove("show"); return; }
+  showErr("m-err", false);
+  var pct = 15 + (hashStr("mood|" + normName(name) + "|" + todayStr()) % 86); /* 15–100 */
+  var mood = MOODS.filter(function(m){ return pct >= m.min; })[0];
+  mState = { name: name, pct: pct, face: mood.face, text: mood.text };
+  $("m-result").classList.add("show");
+  $("m-face").textContent = mood.face;
+  animateNum($("m-num"), pct);
+  $("m-bar").style.width = "0%";
+  setTimeout(function(){ $("m-bar").style.width = pct + "%"; }, 60);
+  $("m-line").textContent = mood.text;
+  $("m-sub").textContent = name + "-এর আজকের মুড • কাল আবার চেক করো, মুড বদলে যাবে!";
+  $("m-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+$("m-copy").addEventListener("click", function(){
+  if (!mState) return;
+  copyText("😊 আজকের মুড মিটার!\n" + mState.name + "-এর আজকের মুড: " + mState.face + " " + bn(mState.pct) + "%\n" + mState.text + "\nতোমার মুড কেমন? চেক করো BD Fun Tools-এ! 🌈", this);
+});
+</script>
+<script>
+/* First-click sponsored popunder: the visitor's first click opens the sponsor
+   link in a new tab; the site itself keeps working normally. Once per session. */
+(function () {
+  var LINK = "https://www.profitableratecpmnetwork.com/crdckuxrx?key=8e640f6c29b8e65f3b90970d2be285f5";
+  try { if (sessionStorage.getItem("pop1done")) return; } catch (e) {}
+  function handler(ev) {
+    try { sessionStorage.setItem("pop1done", "1"); } catch (e) {}
+    document.removeEventListener("click", handler, true);
+    if (ev.target && ev.target.closest && ev.target.closest('a[href*="profitableratecpmnetwork"]')) return;
+    window.open(LINK, "_blank");
+  }
+  document.addEventListener("click", handler, true);
+})();
+</script>
+</body>
+</html>
